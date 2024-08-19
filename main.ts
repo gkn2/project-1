@@ -75,9 +75,9 @@ function spawnEnemies () {
     enemy_3.setVelocity(randint(10, 50), randint(10, 50))
     enemy_2.setBounceOnWall(true)
     enemy_3.setBounceOnWall(true)
-    enemy_3.setScale(0.84, ScaleAnchor.Bottom)
-    enemy_2.setScale(1.4, ScaleAnchor.Top)
-    enemy_1.setScale(1.2, ScaleAnchor.Top)
+    enemy_3.setScale(0.645, ScaleAnchor.Middle)
+    enemy_2.setScale(0.9, ScaleAnchor.Middle)
+    enemy_1.setScale(0.9, ScaleAnchor.Middle)
 }
 function spawnHero () {
     hero = sprites.create(img`
@@ -117,9 +117,15 @@ function spawnHero () {
     controller.moveSprite(hero)
     hero.setPosition(17, 97)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    otherSprite.setPosition(randint(0, 160), randint(0, 120))
+})
 let hero: Sprite = null
 let enemy_3: Sprite = null
 let enemy_2: Sprite = null
 let enemy_1: Sprite = null
+info.setLife(3)
+info.setScore(0)
 spawnHero()
 spawnEnemies()
